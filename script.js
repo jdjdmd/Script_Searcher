@@ -17,6 +17,16 @@ async function searchScripts(query) {
     }
 }
 
+async function fetchTrendingScripts() {
+    try {
+        const response = await fetch(`https://api.scriptblox.com/trending`);
+        const data = await response.json();
+        displayTrending(data.results);
+    } catch (error) {
+        console.error('Error fetching trending scripts:', error);
+    }
+}
+
 function displayResults(results) {
     const resultsContainer = document.getElementById('results');
     resultsContainer.innerHTML = '';
@@ -30,3 +40,20 @@ function displayResults(results) {
         resultsContainer.appendChild(resultItem);
     });
 }
+
+function displayTrending(results) {
+    const trendingContainer = document.getElementById('trending');
+    trendingContainer.innerHTML = '';
+    results.forEach(result => {
+        const trendingItem = document.createElement('div');
+        trendingItem.className = 'trending-item';
+        trendingItem.innerHTML = `
+            <h3>${result.title}</h3>
+            <p>${result.description}</p>
+        `;
+        trendingContainer.appendChild(trendingItem);
+    });
+}
+
+// Fetch trending scripts on page load
+fetchTrendingScripts();
