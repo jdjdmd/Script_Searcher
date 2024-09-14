@@ -9,7 +9,7 @@ document.getElementById('searchBar').addEventListener('keypress', function(event
 
 async function searchScripts(query) {
     try {
-        const response = await fetch(`https://api.scriptblox.com/search?query=${query}`);
+        const response = await fetch(`https://scriptblox-api-proxy.vercel.app/api/search?q=${encodeURIComponent(searchInput)}&mode=${encodeURIComponent(modeSelect)}&page=${page}`);
         const data = await response.json();
         displayResults(data.results);
     } catch (error) {
