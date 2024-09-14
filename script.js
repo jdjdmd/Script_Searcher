@@ -1,7 +1,9 @@
-document.getElementById('searchBar').addEventListener('input', function() {
-    const query = this.value;
-    if (query.length > 2) {
-        searchScripts(query);
+document.getElementById('searchBar').addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+        const query = this.value;
+        if (query.length > 2) {
+            searchScripts(query);
+        }
     }
 });
 
